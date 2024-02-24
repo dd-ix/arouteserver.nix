@@ -31,22 +31,13 @@ let
 in
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "arouteserver";
-  version = "1.21.5";
+  version = "1.21.6";
   format = "pyproject";
 
   src = pkgs.fetchPypi {
     inherit pname version;
-    hash = "sha256-S/2eFfIRL26OaMUZQ0B628tmWjyaLqQCUmGTVqBBSsA=";
+    hash = "sha256-JQFtVrbinva+w8WS2r+d/3aUxeocD/i5lh2DvSl3YLE=";
   };
-
-  patches = [
-    # fix http downloads
-    (pkgs.fetchpatch {
-      url = "https://github.com/dd-ix/arouteserver/commit/fc0e78acb78c4ccb1a90db416456ccf03cbf5a42.patch";
-      hash = "sha256-SfNmF1t0veCItpLPf4e6zXtNpu2pj3gpCu2b3Bca8gI=";
-    })
-  ];
-
 
   nativeBuildInputs = with pkgs.python3Packages; [
     setuptools
