@@ -31,12 +31,12 @@ let
 in
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "arouteserver";
-  version = "1.21.6";
+  version = "1.21.7";
   format = "pyproject";
 
   src = pkgs.fetchPypi {
     inherit pname version;
-    hash = "sha256-JQFtVrbinva+w8WS2r+d/3aUxeocD/i5lh2DvSl3YLE=";
+    hash = "sha256-ldOx/1/gHSmzR1YfelCUfZE7V62p4tBFCCX5HKfjubQ=";
   };
 
   nativeBuildInputs = with pkgs.python3Packages; [
