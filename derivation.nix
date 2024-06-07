@@ -11,6 +11,10 @@ let
       hash = "sha256-vg14uOhPltsvxn0XlV0W9gy9dq3+vZpi/h3Hytmyc9k=";
     };
 
+    postPatch = ''
+      substituteInPlace setup.py --replace-fail 'py-radix==0.10.0' 'py-radix-sr'
+    '';
+
     nativeBuildInputs = with pkgs.python3Packages; [
       setuptools
     ];
@@ -38,6 +42,10 @@ pkgs.python3Packages.buildPythonPackage rec {
     inherit pname version;
     hash = "sha256-/s+y1KsUouH+kx+c44LjWh7PuuA1goPhEKvVaIoET2c=";
   };
+
+  postPatch = ''
+    substituteInPlace requirements.txt --replace-fail 'packaging~=21.0' 'packaging'
+  '';
 
   nativeBuildInputs = with pkgs.python3Packages; [
     setuptools
