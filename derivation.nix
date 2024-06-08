@@ -6,9 +6,11 @@ let
     version = "1.0.12";
     format = "pyproject";
 
-    src = pkgs.fetchPypi {
-      inherit pname version;
-      hash = "sha256-vg14uOhPltsvxn0XlV0W9gy9dq3+vZpi/h3Hytmyc9k=";
+    src = pkgs.fetchFromGitHub {
+      owner = "job";
+      repo = pname;
+      rev = version;
+      hash = "sha256-tBo9LSmEu/0KPSeg17dlh7ngUvP9GyW6b01qqpr5Bx0=";
     };
 
     postPatch = ''
@@ -20,6 +22,7 @@ let
     ];
 
     nativeCheckInputs = with pkgs.python3Packages; [
+      pytest
       mock
       coverage
       nose
@@ -29,7 +32,14 @@ let
       py-radix-sr
     ];
 
-    # TODO: execute tests
+    checkPhase = ''
+      runHook preCheck
+
+      pytest -vs -x tests
+
+      runHook postCheck
+    '';
+
     doCheck = true;
   };
 in
@@ -38,9 +48,12 @@ pkgs.python3Packages.buildPythonPackage rec {
   version = "1.22.1";
   format = "pyproject";
 
-  src = pkgs.fetchPypi {
-    inherit pname version;
-    hash = "sha256-/s+y1KsUouH+kx+c44LjWh7PuuA1goPhEKvVaIoET2c=";
+  src = pkgs.fetchFromGitHub {
+    #inherit pname version;
+    owner = "pierky";
+    repo = pname;
+    rev = "v${version}";
+    hash = "sha256-8xYfTjtsMoLuDpJ8oLnDRP2oIcZvzlMESlREc2S1DmU=";
   };
 
   postPatch = ''
@@ -55,6 +68,14 @@ pkgs.python3Packages.buildPythonPackage rec {
     bgpq4
   ];
 
+  nativeCheckInputs = with pkgs.python3Packages;[
+    pytest
+  ];
+
+  checkInputs = with pkgs.python3Packages; [
+    requests-mock
+  ];
+
   propagatedBuildInputs = with pkgs.python3Packages; [
     aggregate6
     jinja2
@@ -66,6 +87,14 @@ pkgs.python3Packages.buildPythonPackage rec {
     setuptools
   ];
 
-  doCheck = false;
+  checkPhase = ''
+    runHook preCheck
+
+    pytest -vs -x tests/static/
+
+    runHook postCheck
+  '';
+
+  doCheck = true;
 }
 
