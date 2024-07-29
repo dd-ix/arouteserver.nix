@@ -45,20 +45,15 @@ let
 in
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "arouteserver";
-  version = "1.22.1";
+  version = "1.23.0";
   format = "pyproject";
 
   src = pkgs.fetchFromGitHub {
-    #inherit pname version;
     owner = "pierky";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-8xYfTjtsMoLuDpJ8oLnDRP2oIcZvzlMESlREc2S1DmU=";
+    hash = "sha256-mgulcGLUzNPIeDAZ2rrpo8OWegNHqNdxbmnbtuoOosE=";
   };
-
-  postPatch = ''
-    substituteInPlace requirements.txt --replace-fail 'packaging~=21.0' 'packaging'
-  '';
 
   nativeBuildInputs = with pkgs.python3Packages; [
     setuptools

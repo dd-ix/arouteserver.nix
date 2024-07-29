@@ -20,7 +20,7 @@
         }
       ) // {
       overlays.default = _: prev: {
-        arouteserver = self.packages."${prev.system}".arouteserver;
+        inherit (self.packages."${prev.system}") arouteserver;
       };
     };
 }
