@@ -45,14 +45,14 @@ let
 in
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "arouteserver";
-  version = "1.23.0";
+  version = "1.23.1";
   format = "pyproject";
 
   src = pkgs.fetchFromGitHub {
     owner = "pierky";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-mgulcGLUzNPIeDAZ2rrpo8OWegNHqNdxbmnbtuoOosE=";
+    hash = "sha256-EZOBMDBsxbuVzzjQWU8V4n3gcLkRQxCq2eVK/Tyko4E=";
   };
 
   nativeBuildInputs = with pkgs.python3Packages; [
